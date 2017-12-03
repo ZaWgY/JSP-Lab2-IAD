@@ -32,11 +32,11 @@ public class AreaCheckServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(list==null){
-            list=new ArrayList<>();
+            list=new ArrayList<Point>();
             getServletContext().setAttribute("list", list);
         }
         String check = "";
-        List<Point> temp= new ArrayList<>();
+        List<Point> temp= new ArrayList<Point>();
         try {
             double x, y, r, pageX, pageY;
             x = Double.parseDouble(request.getParameter("X"));
