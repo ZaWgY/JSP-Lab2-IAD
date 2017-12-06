@@ -86,7 +86,7 @@ function onloadcheck(realX, realY, r, pageX, pageY) {
             if (realX[i] <= 0 && realY[i] >= 0 && realY[i] <= r[i] && realX[i] >= -r[i]) {
                 check = true;
             }
-            if (realX[i] >= 0 && realY[i] >= 0 && realY[i] >= r[i] - 2*realX[i]) {
+            if (realX[i] >= 0 && realY[i] >= 0 && realY[i] <= r[i] - 2*realX[i]) {
                 check = true;
             }
             if (realX[i] <= 0 && realY[i] <= 0 && realY[i] * realY[i] + realX[i] * realX[i] <= r[i] * r[i] / 4) {
