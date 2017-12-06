@@ -7,6 +7,7 @@ public class Point {
     private double pageX;
     private double pageY;
     private boolean isInArea;
+    private static boolean isCloudArea;
     Point(double x,double y, double r, double pageX, double pageY){
         this.x=x;
         this.y=y;
@@ -14,7 +15,7 @@ public class Point {
         this.pageX = pageX;
         this.pageY = pageY;
         isInArea = checkArea(x,y,r);
-
+        isCloudArea = false;
     }
 
     public double getX() {
@@ -72,5 +73,35 @@ public class Point {
             return true;
         }
         return false;
+    }
+
+    public static boolean checkCloudArea(double x,double y,double R){
+        x = Math.abs(x);
+        y = Math.abs(y);
+        double a1 = R;
+        double b1 = R/4;
+        double a2 = 3*R/8;
+        double b2 = R/4;
+        double dx2 = a2;
+        double dy2 = b2;
+        double r = R/4;
+        double dy3 = 3*R/8;
+        //Верхняя часть - окружность
+        if (Math.pow(x, 2) + Math.pow(y-dy3, 2) <= Math.pow(r, 2)){
+            return true;
+        }
+        //Основная часть - эллипс
+        else if (Math.pow(x, 2)/Math.pow(a1, 2) + Math.pow(y, 2)/Math.pow(b1, 2) <= 1){
+            return true;
+        }
+        //Еще один эллипс
+        else if (Math.pow(x-dx2, 2)/Math.pow(a2, 2) + Math.pow(y-dy2, 2)/Math.pow(b2, 2) <= 1){
+            return true;
+        }
+        else return false;
+    }
+
+    public static void setCloudGraph(boolean condition){
+        isCloudArea = condition;
     }
 }

@@ -151,6 +151,74 @@
       </td>
     </tr>
   </form>
+    <tr>
+        <td>
+            <input type="text" name="filt" list="dl_continents" id="filt">
+            <datalist id="dl_continents">
+                <option data-value = "Saint Petersburg" value="Санкт-Петербург"></option>
+                <option data-value = "Moscow" value="Москва"></option>
+                <option data-value = "Florida" value="Флорида"></option>
+                <option data-value = "New York" value="Нью-Йорк"></option>
+                <option data-value = "London" value="Лондон"></option>
+                <option data-value = "Paris" value="Париж"></option>
+                <option data-value = "Berlin" value="Берлин"></option>
+            </datalist>
+
+
+            <input type="button" onclick = "getValue()" value = "Погода">
+            <div id = "infText" style="visibility: hidden"></div>
+            <script>
+                /*document.getElementById("filt").oninput = function(){
+                    var inp = this.value;
+                    var opt = document.querySelector("#dl_continents option[value='" + inp + "']");
+                    //if (opt) this.value = opt.dataset.value;
+                };*/
+
+                function getValue(){
+                    var elem = document.getElementById("filt");
+                    var opt = document.querySelector("#dl_continents option[value='" + elem.value+"']");
+                    if (opt){
+                        document.getElementById("infText").style.visibility = "hidden";
+                    }else{
+                        document.getElementById("infText").style.visibility = "visible";
+                        document.getElementById("infText").innerText = "Не верно введено значение города, выберите из списка";
+                    }
+                    var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + opt.dataset.value +
+                        '&APPID=c7dd37ffc633622e0a910e2ed7519a41';
+                    ajax_get(url, function(data) {
+                        var weather = data['weather']['0']['main'];
+                        switch (weather) {
+                            case 'Snow':
+                            case 'Clouds':
+                            case 'Rain':
+                                //поменять график
+                            default :
+                                document.getElementById("infText").style.visibility = "visible";
+                                document.getElementById("infText").innerText = weather;
+                        }
+                    });
+                }
+
+                function ajax_get(url, callback) {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            console.log('responseText:' + xmlhttp.responseText);
+                            try {
+                                var data = JSON.parse(xmlhttp.responseText);
+                            } catch(err) {
+                                console.log(err.message + " in " + xmlhttp.responseText);
+                                return;
+                            }
+                            callback(data);
+                        }
+                    };
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                }
+            </script>
+        </td>
+    </tr>
 </table>
 <%
 
