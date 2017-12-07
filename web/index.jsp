@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" import="java.util.List, java.util.ArrayList, Kek1.Point"%>
+<%@ page import="Kek1.Cloud" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -187,15 +188,25 @@
                         '&APPID=c7dd37ffc633622e0a910e2ed7519a41';
                     ajax_get(url, function(data) {
                         var weather = data['weather']['0']['main'];
-                        switch (weather) {
-                            case 'Snow':
-                            case 'Clouds':
-                            case 'Rain':
-                                //поменять график
-                            default :
-                                document.getElementById("infText").style.visibility = "visible";
-                                document.getElementById("infText").innerText = weather;
-                        }
+                        if (weather == "Snow" || weather == "Clouds" || weather == "Rain") {
+                            document.getElementById('find').src = 'images/cloud.png?' + Math.random();
+                            <% Cloud.setIsCloudArea(true);%>
+                        }<%-- else {--%>
+                            <%--document.getElementById('find').src = 'images/graf.png?' + Math.random();--%>
+                            <%--<% Cloud.setIsCloudArea(false);%>--%>
+                        <%--}--%>
+
+//                        switch (weather) {
+//                            case 'Snow':
+//                            case 'Clouds':
+//                            case 'Rain':
+//                                //поменять график
+//                                 document.getElementById('find').src='images/cloud.png?' + Math.random();
+//                                //isCloudArea
+//                            default :
+                        document.getElementById("infText").style.visibility = "visible";
+                        document.getElementById("infText").innerText = weather;
+                    //}
                     });
                 }
 

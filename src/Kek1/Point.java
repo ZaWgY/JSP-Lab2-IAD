@@ -15,7 +15,7 @@ public class Point {
         this.pageX = pageX;
         this.pageY = pageY;
         isInArea = checkArea(x,y,r);
-        isCloudArea = false;
+        //isCloudArea = false;
     }
 
     public double getX() {
@@ -63,7 +63,7 @@ public class Point {
     }
 
     public static boolean checkArea(double x,double y,double R){
-        if(x<=0&&y>=0&&y<=R&&x>=-R){
+        if(x<=0&&y>=0&&y<=R&&x>=-R/2){
             return true;
         }
         if(x>=0&&y>=0&&y<=R-2*x){
@@ -103,5 +103,8 @@ public class Point {
 
     public static void setCloudGraph(boolean condition){
         isCloudArea = condition;
+    }
+    public static boolean getCloudGraph(){
+        return isCloudArea;
     }
 }

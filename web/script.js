@@ -25,7 +25,7 @@ $(document).ready(function () {
         };
 
         var check = false;
-        if(realX<=0&&realY>=0&&realY<=r&&realX>=-r){
+        if(realX<=0&&realY>=0&&realY<=r&&realX>=-r/2){
             check = true;
         }
         if(realX>=0&&realY>=0&&realY<=r-2*realX){
@@ -83,7 +83,7 @@ function onloadcheck(realX, realY, r, pageX, pageY) {
     for (var i = 0; i < realX.length; i++) {
         if (pageX[i] != 0){
             var check = false;
-            if (realX[i] <= 0 && realY[i] >= 0 && realY[i] <= r[i] && realX[i] >= -r[i]) {
+            if (realX[i] <= 0 && realY[i] >= 0 && realY[i] <= r[i] && realX[i] >= -r[i]/2) {
                 check = true;
             }
             if (realX[i] >= 0 && realY[i] >= 0 && realY[i] <= r[i] - 2*realX[i]) {
